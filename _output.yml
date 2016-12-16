@@ -10,7 +10,7 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">ABJ</a></li>
+        <li><a href='http://abj.org.br'><img src='abj_logo_cut.png' /></a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
