@@ -1,0 +1,10 @@
+book_filename: "tjspBook"
+date: "`r as.Date('2016-11-28')`"
+chapter_name: ''
+header-includes:
+   - \setlength\parindent{20pt}
+   - \linespread{1.6}
+   - \usepackage[scaled=.8]{beramono}
+   - \renewcommand\arraystretch{0.7}
+   - \renewcommand{\familydefault}{\sfdefault}
+   - \setmonofont{\ttdefault}
