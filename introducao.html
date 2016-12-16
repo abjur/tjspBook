@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introducao.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="metodologia.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,27 +142,58 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Estudo sobre varas empresariais na Comarca de São Paulo</h1>
-<h4 class="author"><em>Associação Brasileira de Jurimetria</em></h4>
-<h4 class="date"><em>2016-11-28</em></h4>
+<div id="introducao" class="section level1">
+<h1><span class="header-section-number">2</span> Introdução</h1>
+<p>A especialização de varas é um tema de interesse na administração do judiciário. Atualmente, os poucos estudos disponíveis fazem muitas suposições para chegar às conclusões ou esbarram em dificuldades impostas pela documentação dos dados.</p>
+<p>Nesse estudo, discutimos a criação de varas empresariais na Comarca de São Paulo e desenvolvemos metodologias inovadoras para resolver três problemas. O primeiro é a vinculação de normas para determinação de competências com assuntos da Tabela Processual Unificada do CNJ (Res. 46). O segundo é o tratamento de falhas na classificação dos assuntos na base de dados analisada. O terceiro é criar uma métrica de mensuração e comparação dos esforços empreendidos por magistrados em processos comuns e empresariais.</p>
+<p>Nas análises realizadas, encontramos evidências de que um processo empresarial demanda aproximadamente o dobro de esforço do que um processo comum. Ao realizar correções no volume processual a partir de um modelo de tratamento dos assuntos, concluímos que dois é o número ideal de varas empresariais que devem ser instaladas para atendimento da demanda existente.</p>
+<div id="objetivo-do-estudo" class="section level2">
+<h2><span class="header-section-number">2.1</span> Objetivo do estudo</h2>
+<p>O presente estudo tem como objetivo geral fornecer insumos quantitativos para analisar o tema da especialização de varas empresariais. Por conta da existência de critérios de criação de varas, que serão explicitados na sequência, duas atividades receberão maior atenção no decorrer do relatório, sendo elas</p>
+<ul>
+<li>Estimar o volume de processos empresariais distribuídos por ano nas 45 varas cíveis do Foro Central.</li>
+<li>Propor uma métrica de esforço do juíz em um processo e comparar o esforço médio em processos empresariais contra o esforço médio em processos não empresariais.</li>
+</ul>
 </div>
-<div id="preambulo" class="section level1">
-<h1><span class="header-section-number">1</span> Preâmbulo</h1>
-<p>Este é um relatório escrito em <strong>Markdown</strong> descrevendo um estudo realizado para a corregedoria do Tribunal de Justiça de São Paulo. O estudo em questão teve a finalidade de auxiliar a tomada de decisão na criação das varas especializadas em direito comercial na Comarca de São Paulo.</p>
-<p>Para compilar este relatório, você precisará da versão de desenvolvimento do pacote <strong>bookdown</strong> disponível no Github do rstudio:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</code></pre></div>
-<p>Cada arquivo Rmd contém um e apenas um capítulo, e cada capítulo é definido pelo primeiro nível de cabeçalho <code>#</code>.</p>
-<p>Para compilar este documento em PDF, você precisará utilizar XeLaTeX.</p>
+<div id="criterios-para-criacao-de-varas" class="section level2">
+<h2><span class="header-section-number">2.2</span> Critérios para criação de varas</h2>
+<p>O Provimento n. 82/2011 do Tribunal de Justiça de São Paulo (TJSP) dispõe em seu artigo 4º que a criação de novas unidades ou a especialização das varas existentes obedecerá aos seguintes critérios:</p>
+<ol style="list-style-type: decimal">
+<li>a análise levará em conta, preferencialmente, os feitos distribuídos, e considerará as características da vara (natureza da jurisdição, complexidade da distribuição, entrância em que classificada, etc);</li>
+<li>a distância da sede e a população local, para a criação de foros distritais ou regionais. A distância será indicada em quilômetros, segundo as vias usuais de acesso;</li>
+<li>a carga de serviço por juiz nas varas antigas e nas varas novas, que resultar da instalação, entendido, como número mínimo para deflagrar o procedimento de criação, 1.800 processos novos por ano nas varas cíveis, de família e da fazenda pública, excluídas as precatórias e as execuções fiscais; 600 denúncias por ano, nas varas criminais; e a proporção dessas quantidades nas varas cumulativas, conforme a representatividade de cada um. A carga de trabalho nos Juizados Especiais Cíveis e Criminais será examinada caso a caso, ante a especificidade da jurisdição;</li>
+<li>preferencialmente, não haverá redistribuição de feitos, mesmo em caso de especialização de varas, prorrogando-se, nesta hipótese, a jurisdição das varas em relação aos feitos já distribuídos e com observância do Provimento CG- 442/91 (grifos nossos).</li>
+</ol>
+<p>Nesse estudo, focamos principalmente no terceiro item. Esta escolha se justifica pela importância do tópico e a possibilidade de levantamento de dados quantitativos a partir das bases do Tribunal.</p>
+</div>
+<div id="base-de-dados" class="section level2">
+<h2><span class="header-section-number">2.3</span> Base de dados</h2>
+<p>Compõe a população em estudo o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.</p>
+<p>As seguintes informações foram fornecidas pela Secretaria de Tecnologia de Informação (STI) do TJSP:</p>
+<ul>
+<li>Número do processo</li>
+<li>Autor</li>
+<li>Réu</li>
+<li>Vara</li>
+<li>Assunto, segundo as categorias descritas na tabela unificada de assuntos do Conselho Nacional de Justiça (CNJ).</li>
+<li>Classe, segundo as categorias descritas na tabela unificada de assuntos do CNJ.</li>
+<li>Data de distribuição</li>
+<li>Lista de movimentações contendo:
+<ul>
+<li>Data da movimentação</li>
+<li>Título da movimentação, remotamente inspirado nas categorias descritas na tabela unificada de movimentações do CNJ.</li>
+</ul></li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introducao.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="metodologia.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
