@@ -39,6 +39,8 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE,
 base <- './'
 if(stringr::str_detect(getwd(), 'docs')) base <- '../'
 
+rm_accent <- function(x) gsub("`", "", iconv(x, to = "ASCII//TRANSLIT"))
+
 # pacotes
 library(tidyverse)
 library(lubridate)
