@@ -1,0 +1,8 @@
+Package: abjBookTemplate
+Title: Does not matter.
+Version: 0.0.1
+Imports: bookdown,
+    tidyverse,
+    survival,
+    knitr
+Remotes: rstudio/bookdown
