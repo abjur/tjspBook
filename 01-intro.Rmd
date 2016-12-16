@@ -1,0 +1,48 @@
+---
+output: 
+  html_document: 
+    number_sections: yes
+---
+
+# Introdução
+
+A especialização de varas é um tema de interesse na administração do judiciário. Atualmente, os poucos estudos disponíveis fazem muitas suposições para chegar às conclusões ou esbarram em dificuldades impostas pela documentação dos dados.
+
+Nesse estudo, discutimos a criação de varas empresariais na Comarca de São Paulo e desenvolvemos metodologias inovadoras para resolver três problemas. O primeiro é a vinculação de normas para determinação de competências com assuntos da Tabela Processual Unificada do CNJ (Res. 46). O segundo é o tratamento de falhas na classificação dos assuntos na base de dados analisada. O terceiro é criar uma métrica de mensuração e comparação dos esforços empreendidos por magistrados em processos comuns e empresariais.
+
+Nas análises realizadas, encontramos evidências de que um processo empresarial demanda aproximadamente o dobro de esforço do que um processo comum. Ao realizar correções no volume processual a partir de um modelo de tratamento dos assuntos, concluímos que dois é o número ideal de varas empresariais que devem ser instaladas para atendimento da demanda existente.
+
+## Objetivo do estudo
+
+O presente estudo tem como objetivo geral fornecer insumos quantitativos para analisar o tema da especialização de varas empresariais. Por conta da existência de critérios de criação de varas, que serão explicitados na sequência, duas atividades receberão maior atenção no decorrer do relatório, sendo elas
+
+- Estimar o volume de processos empresariais distribuídos por ano nas 45 varas cíveis do Foro Central.
+- Propor uma métrica de esforço do juíz em um processo e comparar o esforço médio em processos empresariais contra o esforço médio em processos não empresariais.
+
+## Critérios para criação de varas
+
+O Provimento n. 82/2011 do Tribunal de Justiça de São Paulo (TJSP) dispõe em seu artigo 4º que a criação de novas unidades ou a especialização das varas existentes obedecerá aos seguintes critérios: 
+
+1. a análise levará em conta, preferencialmente, os feitos distribuídos, e considerará as características da vara (natureza da jurisdição, complexidade da distribuição, entrância em que classificada, etc); 
+1. a distância da sede e a população local, para a criação de foros distritais ou regionais. A distância será indicada em quilômetros, segundo as vias usuais de acesso; 
+1. a carga de serviço por juiz nas varas antigas e nas varas novas, que resultar da instalação, entendido, como número mínimo para deflagrar o procedimento de criação, 1.800 processos novos por ano nas varas cíveis, de família e da fazenda pública, excluídas as precatórias e as execuções fiscais; 600 denúncias por ano, nas varas criminais; e a proporção dessas quantidades nas varas cumulativas, conforme a representatividade de cada um. A carga de trabalho nos Juizados Especiais Cíveis e Criminais será examinada caso a caso, ante a especificidade da jurisdição; 
+1. preferencialmente, não haverá redistribuição de feitos, mesmo em caso de especialização de varas, prorrogando-se, nesta hipótese, a jurisdição das varas em relação aos feitos já distribuídos e com observância do Provimento CG- 442/91 (grifos nossos).
+
+Nesse estudo, focamos principalmente no terceiro item. Esta escolha se justifica pela importância do tópico e a possibilidade de levantamento de dados quantitativos a partir das bases do Tribunal.
+
+## Base de dados
+
+Compõe a população em estudo o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.
+
+As seguintes informações foram fornecidas pela Secretaria de Tecnologia de Informação (STI) do TJSP:
+
+- Número do processo
+- Autor
+- Réu
+- Vara
+- Assunto, segundo as categorias descritas na tabela unificada de assuntos do Conselho Nacional de Justiça (CNJ).
+- Classe, segundo as categorias descritas na tabela unificada de assuntos do CNJ.
+- Data de distribuição
+- Lista de movimentações contendo:
+    - Data da movimentação
+    - Título da movimentação, remotamente inspirado nas categorias descritas na tabela unificada de movimentações do CNJ.

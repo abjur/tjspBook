@@ -1,0 +1,7 @@
+# Apêndice
+
+```{r cnj}
+tab_cnj %>% 
+  knitr::kable(longtable = TRUE, booktabs = TRUE,
+               caption = 'Tabela de assuntos empresariais, baseada na tabela de assuntos do CNJ e na resolução 623/2013 do TJSP.')
+```
