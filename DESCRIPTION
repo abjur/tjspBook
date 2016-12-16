@@ -10,5 +10,6 @@ Imports: bookdown,
     stringi,
     data.table,
     openxlsx,
-    lazyeval
+    lazyeval,
+    ggfortify
 Remotes: rstudio/bookdown
