@@ -4,5 +4,12 @@ Version: 0.0.1
 Imports: bookdown,
     tidyverse,
     survival,
-    knitr
-Remotes: rstudio/bookdown
+    knitr,
+    janitor,
+    dtplyr,
+    stringi,
+    data.table,
+    openxlsx,
+    lazyeval
+Remotes: rstudio/bookdown,
+    abjur/abjutils
