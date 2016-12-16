@@ -11,5 +11,4 @@ Imports: bookdown,
     data.table,
     openxlsx,
     lazyeval
-Remotes: rstudio/bookdown,
-    abjur/abjutils
+Remotes: rstudio/bookdown
