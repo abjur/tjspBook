@@ -58,6 +58,7 @@ d_fcc <- readr::read_rds(paste0(base, "data/d_fcc.rds"))
 # d_tidy_p <- adicionar_emp(d_tidy, cnj_empresarial, cnj_completa)
 d_tidy_p <- readr::read_rds(paste0(base, "data/d_tidy_p.rds"))
 
+
 # tabela do apendice
 tab_cnj <- cnj_empresarial %>%
   roll() %>%
