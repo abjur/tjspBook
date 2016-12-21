@@ -1,0 +1,11 @@
+# Conclusão 
+
+A partir dos valores estimados, concluímos que o número efetivo de processos distribuídos por ano é 
+
+$$
+N_e = \frac{N \times T_{E,C}}{p} = \frac{`r N` \times `r Tec`}{`r p`} = `r Ne`.
+$$
+
+Considerando apenas o critério de 1800 feitos por ano, o volume efetivo anual de processos observado justifica a criação de pelo menos uma vara empresarial. No entanto, considerando a sobra de mais de 1500 processos, concluímos que a instalação de uma única vara pode sobrecarregar o trabalho dos novos magistrados. Por isso, sugerimos, num cenário ideal, a solução desse problema através da instalação de duas varas especializadas, mas consideramos também que até mesmo a instalação de uma única vara com dois juízes já seria satisfatória.
+
+Por fim, ressaltamos que a instalação da(s) vara(s) precisa ser acompanhada com métricas de produtividade adequadas. Para isso, será necessário registrar o volume mensal de processos distribuído na(a) vara(s), avaliando se a especialização reduz o tempo mediano dos processos e a taxa de reforma de decisão.
