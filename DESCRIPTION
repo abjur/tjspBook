@@ -2,7 +2,15 @@ Package: abjBookTemplate
 Title: Does not matter.
 Version: 0.0.1
 Imports: bookdown,
-    tidyverse,
+    tidyr,
+    dplyr,
+    readr,
+    ggplot2,
+    readxl,
+    purrr,
+    stringr,
+    lubridate,
+    forcats,
     survival,
     knitr,
     janitor,
