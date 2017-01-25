@@ -42,7 +42,12 @@ if(stringr::str_detect(getwd(), 'docs')) base <- '../'
 rm_accent <- function(x) gsub("`", "", iconv(x, to = "ASCII//TRANSLIT"))
 
 # pacotes
-library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(forcats)
+library(readxl)
 library(lubridate)
 library(stringr)
 library(readr)
