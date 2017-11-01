@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Estudo sobre varas empresariais na Comarca de São Paulo</title>
   <meta name="description" content="Relatório elaborado a pedido da corregedoria do Tribunal de Justiça do Estado de São Paulo com a finalidade de viabilizar a instalação de varas especializadas.">
-  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
 
   <meta property="og:title" content="Estudo sobre varas empresariais na Comarca de São Paulo" />
   <meta property="og:type" content="book" />
@@ -144,7 +144,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">2</span> Introdução</h1>
 <p>A especialização de varas é um tema de interesse na administração do judiciário. Atualmente, os poucos estudos disponíveis fazem muitas suposições para chegar às conclusões ou esbarram em dificuldades impostas pela documentação dos dados.</p>
 <p>Nesse estudo, discutimos a criação de varas empresariais na Comarca de São Paulo e desenvolvemos metodologias inovadoras para resolver três problemas. O primeiro é a vinculação de normas para determinação de competências com assuntos da Tabela Processual Unificada do CNJ (Res. 46). O segundo é o tratamento de falhas na classificação dos assuntos na base de dados analisada. O terceiro é criar uma métrica de mensuração e comparação dos esforços empreendidos por magistrados em processos comuns e empresariais.</p>
-<p>Nas análises realizadas, encontramos evidências de que um processo empresarial demanda aproximadamente o dobro de esforço do que um processo comum. Ao realizar correções no volume processual a partir de um modelo de tratamento dos assuntos, concluímos que dois é o número ideal de varas empresariais que devem ser instaladas para atendimento da demanda existente.</p>
+<p>Nas análises realizadas, encontramos evidências de que um processo empresarial demanda aproximadamente o dobro de esforço do que um processo comum. Ao realizar correções no volume processual a partir de um modelo de tratamento dos assuntos, concluímos que duas varas empresariais atendem adequadamente a demanda existente.</p>
 <div id="objetivo-do-estudo" class="section level2">
 <h2><span class="header-section-number">2.1</span> Objetivo do estudo</h2>
 <p>O presente estudo tem como objetivo geral fornecer insumos quantitativos para analisar o tema da especialização de varas empresariais. Por conta da existência de critérios de criação de varas, que serão explicitados na sequência, duas atividades receberão maior atenção no decorrer do relatório, sendo elas</p>
@@ -166,7 +166,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="base-de-dados" class="section level2">
 <h2><span class="header-section-number">2.3</span> Base de dados</h2>
-<p>Compõe a população em estudo o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.</p>
+<p>A população em estudo é o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.</p>
 <p>As seguintes informações foram fornecidas pela Secretaria de Tecnologia de Informação (STI) do TJSP:</p>
 <ul>
 <li>Número do processo</li>
@@ -202,7 +202,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
@@ -236,7 +236,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(script.src))
       script.src  = script.src.replace(/^https?:/, '');
     document.getElementsByTagName("head")[0].appendChild(script);
