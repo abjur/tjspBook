@@ -117,4 +117,13 @@ numeros_esperados <- d_tidy %>%
    theme_bw(12) +
    xlab("Total de tempo acumulado\ngasto em decisões e despachos (dias)") +
    ylab("Proporção de processos")
+ 
+  p_sobrev_total <- d_fcc %>%
+   filter(tipo != "RJ") %>%
+   with(survfit(Surv(tempo_total, censura) ~ tipo)) %>%
+   ggfortify:::autoplot.survfit(conf.int = F, surv.geom = 'line', censor = F) +
+   scale_x_continuous(limits = c(0,250)) +
+   theme_bw(12) +
+   xlab("Tempo até a última movimentação (dias)") +
+   ylab("Proporção de processos")
 ```
