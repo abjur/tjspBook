@@ -10,7 +10,7 @@ A especialização de varas é um tema de interesse na administração do judici
 
 Nesse estudo, discutimos a criação de varas empresariais na Comarca de São Paulo e desenvolvemos metodologias inovadoras para resolver três problemas. O primeiro é a vinculação de normas para determinação de competências com assuntos da Tabela Processual Unificada do CNJ (Res. 46). O segundo é o tratamento de falhas na classificação dos assuntos na base de dados analisada. O terceiro é criar uma métrica de mensuração e comparação dos esforços empreendidos por magistrados em processos comuns e empresariais.
 
-Nas análises realizadas, encontramos evidências de que um processo empresarial demanda aproximadamente o dobro de esforço do que um processo comum. Ao realizar correções no volume processual a partir de um modelo de tratamento dos assuntos, concluímos que dois é o número ideal de varas empresariais que devem ser instaladas para atendimento da demanda existente.
+Nas análises realizadas, encontramos evidências de que um processo empresarial demanda aproximadamente o dobro de esforço do que um processo comum. Ao realizar correções no volume processual a partir de um modelo de tratamento dos assuntos, concluímos que duas varas empresariais atendem adequadamente a demanda existente.
 
 ## Objetivo do estudo
 
@@ -32,7 +32,7 @@ Nesse estudo, focamos principalmente no terceiro item. Esta escolha se justifica
 
 ## Base de dados
 
-Compõe a população em estudo o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.
+A população em estudo é o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.
 
 As seguintes informações foram fornecidas pela Secretaria de Tecnologia de Informação (STI) do TJSP:
 

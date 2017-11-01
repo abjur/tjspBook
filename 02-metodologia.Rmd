@@ -2,7 +2,7 @@
 
 ## Critérios de identificação de processos empresariais
 
-A construção de um critério claro e reprodutível de classificação de processos empresariais é importante tanto para fins de contagem quanto para fins de mensuração de esforços. Para executar essa tarefa, começaremos construindo uma lista de assuntos processuais, campo disponível no sistema e-SAJ, que estejam relacionados à matéria empresarial, utilizando como ponto de partida a tabela unificada de assuntos do CNJ (Res. 46) e a competência das Câmaras Especializadas em Direito Comercial. 
+A construção de um critério claro e reprodutível de classificação de processos empresariais é importante tanto para fins de contagem quanto para fins de mensuração de esforços. Para executar essa tarefa, começaremos construindo uma lista de assuntos processuais que estejam relacionados à matéria empresarial, utilizando como ponto de partida a tabela unificada de assuntos do CNJ (Res. 46) e a competência das Câmaras Especializadas em Direito Comercial. 
 
 Segundo a Resolução 623/2013 do TJSP, as matérias sob jurisdição das Câmaras Especializadas em Direito Comercial correspondem ao disposto nos quatro primeiros itens da lista abaixo. Entretanto, sob orientação da Corregedoria do TJSP, incluímos dois tópicos extras na nossa lista de assuntos.
 
@@ -17,15 +17,15 @@ Segundo a Resolução 623/2013 do TJSP, as matérias sob jurisdição das Câmar
 
 Após filtrar os assuntos da tabela de assuntos do CNJ associados a esses dispositivos, obtivemos a lista de assuntos descrita na Tabela \@ref(tab:cnj).
 
-Se o procedimento adotado consistisse apenas na construção dessa lista, ele estaria vulnerável a erros de registro, pois alguns processos foram classificados com assuntos mais genéricos do que os especificados na Tabela \@ref(tab:cnj). Por isso, a quantidade de processos empresariais obtida dessa forma subestima a real quantidade de processos empresariais, se considerarmos que existe uma parcela destes que está registrada incorretamente. Denominamos por _cifra oculta_ a quantidade não observada de processos empresariais. 
+Se o procedimento adotado consistisse apenas na construção dessa lista, ele estaria vulnerável a erros de registro, pois alguns processos foram classificados com assuntos mais genéricos do que os especificados na Tabela \@ref(tab:cnj). Por isso, a quantidade de processos empresariais obtida dessa forma subestimaria a real quantidade de processos empresariais, se considerarmos que existe uma parcela destes que está registrada incorretamente. Denominamos por _cifra oculta_ a quantidade não observada de processos empresariais. 
 
-Uma forma de contornar esse problema é reclassificar uma parcela ou a totalidade dos processos com assuntos genéricos como empresariais. Na nossa aplicação, isso foi feito estimando a probabilidade de um determinado processo mal classificado ser, na verdade, de matéria empresarial. Para isso, utilizamos a parcela da base de dados que foi classificada corretamente e calculamos a proporção de processos empresariais para cada assunto. A cifra oculta é estimada somando-se as probabilidades obtidas.
+Uma forma de contornar esse problema é decidir quais processos com assuntos genéricos são, na verdade, empresariais. Na nossa aplicação, isso foi feito estimando a probabilidade de um assunto genérico tratar da matéria empresarial. Para esse cálculo, utilizamos a parcela da base de dados que foi classificada corretamente e calculamos a proporção de processos empresariais para cada assunto. A cifra oculta é estimada somando-se as probabilidades obtidas.
 
 ## Mensuração do esforço do juiz em cada processo {#metotempos}
 
 Definido um critério para identificação de processos empresariais e estimação da cifra oculta, o desafio passa a ser o de mensurar quantitativamente a razão do esforço despendido por um juiz para tratar de processos empresariais com relação a procedimentos comuns. Essa taxa é útil pois possibilita a comparação das cargas de trabalho nos dois regimes. 
 
-A mensuração do esforço está ligada ao tema de complexidade processual, um tópico de pesquisa com muitos eixos de investigação. Até o momento, não há consenso sobre quais metodologias são mais adequadas em cálculos dessa natureza, mas NUNES (2016) oferece algumas sugestões tais como a avaliação do tempo, quantidade de movimentações, quantidade de recursos, partes e valores envolvidos. É possível definir inclusive o conceito de *viscosidade processual*: 
+A mensuração do esforço está ligada ao tema de complexidade processual, um tópico de pesquisa com muitos eixos de investigação. Até o momento, não há consenso sobre quais metodologias são mais adequadas em cálculos dessa natureza, mas NUNES (2016) oferece algumas sugestões tais como a avaliação do tempo, quantidade de movimentações, quantidade de recursos, partes e valores envolvidos. Essas sugestões são consolidadas no conceito de *viscosidade processual*: 
 
 > [...] A viscosidade processual pode
 ser definida como o conjunto de características estruturais de um processo, capazes
@@ -48,7 +48,7 @@ as câmaras reservadas.
 
 Nas análises que seguem, a viscosidade não será utilizada exatamente da forma como foi definida, mas será o ponto de partida para a quantificação do volume de trabalho em processos empresariais e comuns. Como a viscosidade de um fluido está associada à velocidade com que ele escorre em um determinado meio, no contexto jurídico ela estaria associada ao tempo de tramitação dos processos.
 
-Para refinar o conceito, separamos a viscosidade em dois componentes: i) o tempo associado à movimentações serventuárias e ii) o tempo associado à decisões judiciais e outras intervenções dos magistrados. Justificamos essa separação supondo que o tempo gasto pelos magistrados em uma determinada classe de processos é mais informativa com relação à sua dificuldade fática e de direito do que o tempo total de tramitação, sujeito a todo tipo de interferência externa.
+Para refinar o conceito, separamos a viscosidade em dois componentes: i) o tempo associado às movimentações serventuárias e ii) o tempo associado às decisões judiciais e outras intervenções dos magistrados. Justificamos essa separação supondo que o tempo gasto pelos magistrados em uma determinada classe de processos é mais informativa com relação à sua dificuldade fática e de direito do que o tempo total de tramitação, sujeito a todo tipo de interferência externa.
 
 Seguindo essa linha de raciocínio e considerando a finalidade desse estudo, a criação de varas especializadas, vamos definir viscosidade processual como o tempo gasto para a tomada de decisão dos magistrados. Em termos mais precisos, considere $T_i, \ i = 1,\dots,n$ as datas das movimentações disponíveis no sistema e-SAJ de um certo processo, sendo $n$ o seu número de movimentações. Considere também uma variável $D_i, \ i = 1,\dots,n$ que assume valor $1$ se a $i$-ésima movimentação é uma decisão, um despacho ou uma sentença e $0$ em caso contrário. Definimos a viscosidade como
 
@@ -68,6 +68,6 @@ $$
 
 Um obstáculo para a aplicação da metodologia reside na dificuldade de decidir se, num determinado processo, o magistrado gastará mais tempo decidindo ou se todas as suas intervenções já foram realizadas. Para resolver esse problema, os tempos foram estudados a partir de técnicas de Análise de Sobrevivência (MILLER; RUPERT, 2011), uma área da estatística que estuda dados com informações incompletas. 
 
-Um exemplo comum desse tipo de análise é o estudo de tempos de falha de equipamentos (por exemplo, lâmpadas domésticas). Como é inviável aguardar a quebra de todos equipamentos, no momento da análise temos indivíduos que falharam (tempo pontual) e indivíduos que falharão no futuro (censura à direita). A dificuldade disso é que os casos que ainda não quebraram são usualmente aqueles que duram mais e, portanto, ignorá-los pode levar à subestimação do tempo médio/mediano desejado. 
+Um exemplo comum desse tipo de análise é o estudo de tempos de falha de equipamentos (por exemplo, lâmpadas domésticas). Como por vezes é inviável aguardar a quebra de todos equipamentos de uma amostra, no momento da análise temos equipamentos que falharam (denominados falhas) e equipamentos que falharão no futuro (denominados dados censurados à direita). Essa análise é importante, pois ignorar os equipamentos que ainda não falharm pode levar à subestimação dos tempos de falha. As censuras fornecem informação parcial sobre os maiores tempos que poderiam ocorrer se o tempo de observação fosse maior.
 
-Na aplicação, estamos estudando o tempo total associado às decisões, despachos ou sentenças até que o último evento desse tipo ocorra. Consideramos que o tempo de um processo é censurado se ainda não apresentou movimentações que estão associadas a finalização dos processos, como baixa, arquivamento ou sentença. 
+Nesta aplicação, estamos estudando o tempo total associado às decisões, despachos ou sentenças até que o último evento desse tipo ocorra. Consideramos que o tempo de um processo é censurado se ainda não apresentou movimentações que estão associadas a finalização dos processos, como baixa, arquivamento ou sentença. 
