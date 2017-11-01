@@ -1,0 +1,239 @@
+--- 
+title: "Estudo sobre varas empresariais na Comarca de São Paulo"
+author: "Associação Brasileira de Jurimetria"
+date: "`r as.Date('2017-11-01')`"
+---
+
+```{r eval=FALSE, echo = FALSE}
+devtools::install_github("rstudio/bookdown")
+```
+
+```{r include=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+```{r config, echo = FALSE, warnings = FALSE, error = FALSE, message=FALSE}
+# configs
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, 
+                      error = FALSE, message = FALSE)
+base <- '../'
+if(stringr::str_detect(getwd(), 'docs')) base <- '../'
+
+rm_accent <- function(x) gsub("`", "", iconv(x, to = "ASCII//TRANSLIT"))
+
+# pacotes
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(forcats)
+library(readxl)
+library(lubridate)
+library(stringr)
+library(readr)
+library(survival)
+```
+
+
+```{r setup, echo = FALSE, warnings = FALSE, error = FALSE, message=FALSE, cache=TRUE}
+# bases e funcoes
+source(paste0(base, 'R/0-funcoes/adicionar_emp.R'))
+cnj_empresarial <- readr::read_rds(paste0(base, "data/cnj_empresarial.rds"))
+cnj_completa <- readr::read_rds(paste0(base, "data/tabela_cnj_completa.rds"))
+d_tidy <- readr::read_rds(paste0(base, "data/d_tidy.rds"))
+d_fcc <- readr::read_rds(paste0(base, "data/d_fcc.rds"))
+# d_tidy_p <- adicionar_emp(d_tidy, cnj_empresarial, cnj_completa)
+d_tidy_p <- readr::read_rds(paste0(base, "data/d_tidy_p.rds"))
+
+
+# tabela do apendice
+tab_cnj <- cnj_empresarial %>%
+  roll() %>%
+  select(folha, dispositivo_legal, artigo) %>%
+  mutate_all(funs(str_trunc(., width = 35))) %>%
+  select(assunto = folha,
+         `Dispositivo Legal` = dispositivo_legal,
+         Artigo = artigo)
+
+# volume de processos
+N0 <- ceiling(sum(d_tidy_p$p[d_tidy_p$p == 1]) / 3)
+C <- ceiling(sum(d_tidy_p$p[d_tidy_p$p < 1]) / 3)
+N <- ceiling(sum(d_tidy_p[['p']]) / 3)
+Tec <- round(23/11, 2)
+p <- .6
+Ne <- ceiling(ceiling(sum(d_tidy_p[['p']]) / 3) * 23/11 / .6)
+Nmax <- floor(sum(d_tidy_p$p > 0) / 3)
+Nmax <- as.integer(Nmax)
+Vmax <- floor(sum(d_tidy_p$p > 0) / 3 / 1800)
+
+numeros_esperados <- d_tidy %>%
+  inner_join(d_tidy_p, 'n_processo') %>%
+  group_by(assunto) %>%
+  summarise(`# Processos` = n(),
+            `% Empresariais` = sum(p) / `# Processos`,
+            `# Empresariais` = sum(p)) %>%
+  filter(`# Processos` > 0, `% Empresariais` != 1,
+         `% Empresariais` != 0) %>%
+  rename(Assunto = assunto) %>%
+  arrange(desc(`# Empresariais`)) %>%
+  head(10) %>%
+  # janitor::add_totals_row() %>%
+  mutate(`% Empresariais` = scales::percent(`% Empresariais`),
+         `# Empresariais` = round(`# Empresariais`)) %>%
+  # mutate(`% Empresariais` = c(`% Empresariais`[-n()], '-')) %>%
+  identity()
+
+ # volume de trabalho
+ d_fcc <- d_fcc %>%
+   mutate(censura = as.numeric(pmax(julgado, baixa, recurso, sentenca)),
+          censura = if_else(censura > 0, 1, 0)) %>%
+   mutate(t_deci_total = n_deci_e_desp * t_deci)
+
+ p_sobrev <- d_fcc %>%
+   filter(tipo != "RJ") %>%
+   with(survfit(Surv(t_deci_total, censura) ~ tipo)) %>%
+   ggfortify:::autoplot.survfit(conf.int = F, surv.geom = 'line', censor = F) +
+   scale_x_continuous(limits = c(0,250)) +
+   theme_bw(12) +
+   xlab("Total de tempo acumulado\ngasto em decisões e despachos (dias)") +
+   ylab("Proporção de processos")
+```
+
+
+# Contextualização
+
+- O provimento nº 82/2011 do TJSP define critérios para criação de varas:
+    - Uma vara só pode ser criada se o volume de trabalho esperado for maior do que 1.800 processos/ano.
+    - A análise deve levar em conta a complexidade dos feitos.
+
+# Questionamentos
+
+- Na Comarca de São Paulo, quantos processos empresariais são distribuídos por ano?
+    - Pergunta difícil: os registros são \textcolor{red}{imprecisos}.
+    - A classificação proposta pelo CNJ não é bem utilizada.
+
+# Cifra oculta
+
+\begin{figure}
+  \includegraphics{imgs/tpu.png}
+\end{figure}
+    
+# Questionamentos
+
+- Usando apenas as classificações corretas do tribunal:
+    - No Foro Central Cível foram distribuídos 675 processos empresariais por ano.
+    - Nos demais Foros foram distribuídos 450 processos por ano.
+    - Total: 1125 processos/ano.
+
+# Questionamentos
+  
+- O provimento deve ser levado ao pé da letra?
+    - Kesan and Ball (2010), Palumbo et al. (2013) e Wang (2007) sugerem que a especialização em casos complexos traz ganhos de celeridade e qualidade das decisões.
+- Considerando os ganhos, o critério numérico deve impossibilitar a criação das varas?
+- \textbf{Pergunta de pesquisa}: Como comparar processos cíveis e empresariais?
+    
+# Mensuração
+
+- Hipóteses:
+    - Processos empresariais levam mais tempo para serem julgados. \textbf{Viscosidade processual}.
+    - Existe uma massa de processos empresariais que são classificados incorretamente. \textbf{Cifra Oculta}
+    
+# Classificações incorretas
+
+```{r}
+numeros_esperados %>% 
+  ungroup() %>% 
+  mutate(`% Empresariais` = as.numeric(stringr::str_replace_all(`% Empresariais`, "%", "")),
+         Assunto = ifelse(str_detect(Assunto, "Valor da Execução / Cálculo / Atualização"), "Cálculo/Atualização", Assunto),
+         Assunto = ifelse(str_detect(Assunto, "DIREITO DO CONSUMIDOR"), "Direito Consumerista", Assunto),
+         Assunto = ifelse(str_detect(Assunto, "Espécies de Títulos de Crédito"), "Títulos de Crédito", Assunto),
+         Assunto = forcats::fct_reorder(Assunto, `% Empresariais`, fun = median)) %>% ggplot(aes(x = Assunto, y = `% Empresariais`/100)) +
+  geom_bar(stat = 'identity', fill = 'royalblue', color = 'darkgray') +
+  scale_y_continuous(labels = scales::percent, limits = c(0,0.02)) +
+  coord_flip() +
+  theme_minimal(17) +
+  labs(x = "Assunto (Res. 46/CNJ)", y = "Percentual de processos ocultos") +
+  ggtitle("Proporção de casos empresariais\nem cada classificação genérica") +
+  geom_hline(yintercept = 0.01, color = 'red', size = 3)
+```
+
+# Classificações incorretas
+
+- Aplicando as taxas de \textbf{Cifra Oculta}
+    - No Foro Central Cível foram distribuídos 961 processos empresariais/ano.
+    - Nos demais Foros foram distribuídos 641 processos empresariais/ano.
+    - Total: 1602 processos/ano.
+
+# Viscosidade
+
+- O processo demora mais tempo como um todo?
+
+$$\text{Viscosidade} = \text{Tempo total}$$
+
+- O processo custa mais tempo aos magistrados?
+    
+$$\text{Viscosidade} = \text{Tempo entre conclusos e decisões}$$
+
+  
+
+```{r}
+modelo_tempo_total <- d_fcc %>%
+   filter(tipo != "RJ", tempo_total > 0) %>%
+   with(survfit(Surv(tempo_total, censura) ~ tipo)) %>% 
+   broom::tidy()
+
+modelo_tempo_decisao <- d_fcc %>%
+   filter(tipo != "RJ") %>%
+   with(survfit(Surv(t_deci_total, censura) ~ tipo)) %>% 
+   broom::tidy()
+  
+plota_grafico_dificuldade <- function(broom_model) {
+  
+  d_e <- broom_model %>% 
+    filter(strata == "tipo=Empresarial")
+  
+  d_c <- broom_model %>% 
+    filter(strata == "tipo=Comum")
+  
+  fuzzyjoin::difference_inner_join(d_e, d_c, 'estimate', max_dist = 0.01) %>%
+  mutate(razao = time.x/time.y,
+         dificuldade = as.factor(cut(1-estimate.x, breaks = 10, labels = FALSE,
+                                     include.lowest = TRUE))) %>%
+  group_by(dificuldade) %>%
+  summarise(razao = mean(razao)) %>%
+  ggplot(aes(x = as.numeric(dificuldade), y = razao)) +
+  geom_col(fill = 'royalblue') + 
+  theme_minimal(17)
+}
+```
+
+# Viscosidade
+
+```{r}
+plota_grafico_dificuldade(modelo_tempo_total) +
+  geom_hline(yintercept = 1, linetype = 1) +
+  scale_y_continuous(limits = c(0, 1.5)) +
+  labs(x = "Dificuldade do caso", y = "Razão entre as viscosidades") +
+  ggtitle("Razão de viscosidade (tempo total) versus atipicidade")
+```
+
+# Viscosidade
+
+```{r}
+plota_grafico_dificuldade(modelo_tempo_decisao) +
+  geom_hline(yintercept = 1, linetype = 1) +
+  geom_hline(yintercept = 2, linetype = 2) +
+  labs(x = "Dificuldade do caso", y = "Razão entre as viscosidades") +
+  ggtitle("Razão de viscosidade (tempo de decisão) versus atipicidade")
+```
+
+# Conclusões
+
+- Nas duas métricas, processos empresariais são mais viscosos.
+    - Comparando casos de dificuldade moderada, processos empresariais custam o \textcolor{red}{dobro} de tempo para magistrados e 30% de tempo na tramitação total.
+- Aplicando os critérios propostos, a carga de trabalho proporcionada pelos processos empresariais corresponde
+    - a 2082 processos comuns, considerando o custo em tramitação;
+    - a 3349 processos comuns, considerando o tempo gasto pelos magistrados.
