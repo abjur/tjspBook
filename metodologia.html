@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Estudo sobre varas empresariais na Comarca de São Paulo</title>
   <meta name="description" content="Relatório elaborado a pedido da corregedoria do Tribunal de Justiça do Estado de São Paulo com a finalidade de viabilizar a instalação de varas especializadas.">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.9 and GitBook 2.6.7">
 
   <meta property="og:title" content="Estudo sobre varas empresariais na Comarca de São Paulo" />
   <meta property="og:type" content="book" />
@@ -243,9 +243,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
