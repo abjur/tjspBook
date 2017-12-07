@@ -1,0 +1,3 @@
+bookdown::word_document2:
+  reference_docx: Template_ENAJUS_2018.docx
+  toc: no

@@ -1,0 +1,196 @@
+---
+site: bookdown::bookdown_site
+biblio-style: apalike
+bibliography: bib.bib
+---
+
+```{r include = FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE)
+```
+
+
+## Estudo Jurimétrico Sobre Varas Empresariais na Comarca de São Paulo 
+
+### Tema de submissão: Desempenho em organizações da justiça / Relatório
+
+# RESUMO
+
+A especialização de varas é um tema de interesse na administração do judiciário. Atualmente, os poucos estudos disponíveis fazem muitas suposições para chegar às conclusões ou esbarram em dificuldades impostas pela documentação dos dados. Nesse estudo, discutimos a criação de varas empresariais na Comarca de São Paulo e desenvolvemos metodologias inovadoras para resolver três problemas: a vinculação de normas para determinação de competências com assuntos da Tabela Processual Unificada do Conselho Nacional de Justiça; o tratamento de falhas na classificação dos assuntos na base de dados analisada e criar uma métrica de mensuração; e a comparação dos esforços empreendidos por magistrados em processos comuns e empresariais. Após as análises, concluímos que duas varas empresariais atendem adequadamente a demanda existente. O estudo foi utilizado como base para a criação de duas varas empresariais e uma terceira vara de falências e recuperações judiciais na Comarca de São Paulo em dezembro de 2017.
+
+
+<br/>  
+**Palavras-Chave**: jurimetria; especialização; complexidade; cifra oculta; empresarial.
+  
+
+
+# Introdução
+
+A especialização de varas é um tema de interesse na administração do judiciário. Atualmente, os poucos estudos disponíveis fazem muitas suposições para chegar às conclusões ou esbarram em dificuldades impostas pela documentação dos dados.
+
+Nesse estudo, discutimos a criação de varas empresariais na Comarca de São Paulo e desenvolvemos metodologias inovadoras para resolver três problemas. O primeiro é a vinculação de normas para determinação de competências com assuntos da Tabela Processual Unificada do CNJ (Res. 46). O segundo é o tratamento de falhas na classificação dos assuntos na base de dados analisada. O terceiro é criar uma métrica de mensuração e comparação dos esforços empreendidos por magistrados em processos comuns e empresariais.
+
+Nas análises realizadas, encontramos evidências de que um processo empresarial demanda aproximadamente o dobro de esforço do que um processo comum. Ao realizar correções no volume processual a partir de um modelo de tratamento dos assuntos, concluímos que duas varas empresariais atendem adequadamente a demanda existente.
+
+# Objetivo do estudo
+
+O presente estudo tem como objetivo geral fornecer insumos quantitativos para analisar o tema da especialização de varas empresariais. Por conta da existência de critérios de criação de varas, que serão explicitados na sequência, duas atividades receberão maior atenção no decorrer do relatório, sendo elas i) estimar o volume de processos empresariais distribuídos por ano nas 45 varas cíveis do Foro Central e ii) propor uma métrica de esforço do juíz em um processo e comparar o esforço médio em processos empresariais contra o esforço médio em processos não empresariais.
+
+# Critérios para criação de varas
+
+O Provimento n. 82/2011 do Tribunal de Justiça de São Paulo (TJSP) dispõe em seu artigo 4º que a criação de novas unidades ou a especialização das varas existentes obedecerá aos seguintes critérios: "i) a análise levará em conta, preferencialmente, os feitos distribuídos, e considerará as características da vara (natureza da jurisdição, complexidade da distribuição, entrância em que classificada, etc); ii) a distância da sede e a população local, para a criação de foros distritais ou regionais. A distância será indicada em quilômetros, segundo as vias usuais de acesso; iii) a carga de serviço por juiz nas varas antigas e nas varas novas, que resultar da instalação, entendido, como número mínimo para deflagrar o procedimento de criação, **1.800 processos novos por ano nas varas cíveis**, de família e da fazenda pública, excluídas as precatórias e as execuções fiscais; 600 denúncias por ano, nas varas criminais; e a proporção dessas quantidades nas varas cumulativas, conforme a representatividade de cada um. A carga de trabalho nos Juizados Especiais Cíveis e Criminais será examinada caso a caso, ante a especificidade da jurisdição; iv) preferencialmente, não haverá redistribuição de feitos, mesmo em caso de especialização de varas, prorrogando-se, nesta hipótese, a jurisdição das varas em relação aos feitos já distribuídos e com observância do Provimento CG-442/91" (grifos nossos).
+
+Nesse estudo, focamos principalmente no terceiro item. Esta escolha se justifica pela importância do tópico e a possibilidade de levantamento de dados quantitativos a partir das bases do Tribunal.
+
+# Base de dados
+
+A população em estudo é o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.
+
+As seguintes informações foram fornecidas pela Secretaria de Tecnologia de Informação (STI) do TJSP: Número do processo; Autor; Réu; Vara; Assunto, segundo as categorias descritas na tabela unificada de assuntos do Conselho Nacional de Justiça (CNJ); Classe, segundo as categorias descritas na tabela unificada de assuntos do CNJ; Data de distribuição; Lista de movimentações contendo data da movimentação e título da movimentação, remotamente inspirado nas categorias descritas na tabela unificada de movimentações do CNJ.
+
+# Critérios de identificação de processos empresariais
+
+A construção de um critério claro e reprodutível de classificação de processos empresariais é importante tanto para fins de contagem quanto para fins de mensuração de esforços. Para executar essa tarefa, começaremos construindo uma lista de assuntos processuais que estejam relacionados à matéria empresarial, utilizando como ponto de partida a tabela unificada de assuntos do CNJ (Res. 46) e a competência das Câmaras Especializadas em Direito Comercial. 
+
+Segundo a Resolução 623/2013 do TJSP, as matérias sob jurisdição das Câmaras Especializadas em Direito Comercial correspondem ao disposto nos itens da Resolução 623/2013: Artigos 966 a 1195 do Livro II do Código Civil (Lei 10.406/02); Lei das Sociedades Anônimas (Lei 9.604/76); Lei da Propriedade Industrial (Lei 9.279/96); Lei das Franquias (Lei 8.955/94). Entretanto, sob orientação da Corregedoria do TJSP, incluímos dois tópicos extras na nossa lista de assuntos: Procedimentos arbitrais; Artigos 710 a 721 do Código Civil (Lei 10.406/02).
+
+Após filtrar os assuntos da tabela de assuntos do CNJ associados a esses dispositivos, obtivemos a lista de assuntos descrita na Tabela \@ref(tab:cnj).
+
+<!--tabela-->
+
+Se o procedimento adotado consistisse apenas na construção dessa lista, ele estaria vulnerável a erros de registro, pois alguns processos foram classificados com assuntos mais genéricos do que os especificados na Tabela \@ref(tab:cnj). Por isso, a quantidade de processos empresariais obtida dessa forma subestimaria a real quantidade de processos empresariais, se considerarmos que existe uma parcela destes que está registrada incorretamente. Denominamos por *cifra oculta* a quantidade não observada de processos empresariais. 
+
+Uma forma de contornar esse problema é decidir quais processos com assuntos genéricos são, na verdade, empresariais. Na nossa aplicação, isso foi feito estimando a probabilidade de um assunto genérico tratar da matéria empresarial. Para esse cálculo, utilizamos a parcela da base de dados que foi classificada corretamente e calculamos a proporção de processos empresariais para cada assunto. A cifra oculta é estimada somando-se as probabilidades obtidas.
+
+# Mensuração do esforço do juiz em cada processo
+
+Definido um critério para identificação de processos empresariais e estimação da cifra oculta, o desafio passa a ser o de mensurar quantitativamente a razão do esforço despendido por um juiz para tratar de processos empresariais com relação a procedimentos comuns. Essa taxa é útil pois possibilita a comparação das cargas de trabalho nos dois regimes. 
+
+A mensuração do esforço está ligada ao tema de complexidade processual, um tópico de pesquisa com muitos eixos de investigação. Até o momento, não há consenso sobre quais metodologias são mais adequadas em cálculos dessa natureza, mas @nunes2016jurimetria oferece algumas sugestões tais como a avaliação do tempo, quantidade de movimentações, quantidade de recursos, partes e valores envolvidos. Essas sugestões são consolidadas no conceito de viscosidade processual: "[...] A viscosidade processual pode ser definida como o conjunto de características estruturais de um processo, capazes de afetar a sua velocidade. Insistindo na analogia com os fluidos, se um observador separar dois copos, um cheio de mel e outro de água, e virá-los simultaneamente de ponta cabeça, a água cairá mais rápido do que o mel. A maior velocidade da água decorre não da resistência oferecida por um obstáculo externo ao seu deslocamento, mas de diferenças na estrutura íntima de cada substância: o mel é viscoso e avança mais vagarosamente do que a água, que é mais fluida. Seguindo na analogia, também alguns processos são mais viscosos que outros. Processos que envolvam matérias complexas, múltiplas partes ou a produção de provas técnicas elaboradas possuem uma estrutura íntima mais complexa e tendem a avançar mais lentamente do que casos simples, com duas partes e que envolvam a produção apenas de prova documental. Essa complexidade interna é o que chamamos de viscosidade processual, e sua mensuração é fundamental para administrar a carga de trabalho e as metas dos funcionários da justiça, como, por exemplo, na criação de regras para ponderar a distribuição de recursos para as câmaras reservadas."
+
+Nas análises que seguem, a viscosidade não será utilizada exatamente da forma como foi definida, mas será o ponto de partida para a quantificação do volume de trabalho em processos empresariais e comuns. Como a viscosidade de um fluido está associada à velocidade com que ele escorre em um determinado meio, no contexto jurídico ela estaria associada ao tempo de tramitação dos processos.
+
+Para refinar o conceito, separamos a viscosidade em dois componentes: i) o tempo associado às movimentações serventuárias e ii) o tempo associado às decisões judiciais e outras intervenções dos magistrados. Justificamos essa separação supondo que o tempo gasto pelos magistrados em uma determinada classe de processos é mais informativa com relação à sua dificuldade fática e de direito do que o tempo total de tramitação, sujeito a todo tipo de interferência externa.
+
+Seguindo essa linha de raciocínio e considerando a finalidade desse estudo, a criação de varas especializadas, vamos definir viscosidade processual como o tempo gasto para a tomada de decisão dos magistrados. Em termos mais precisos, considere $T_i, \ i = 1,\dots,n$ as datas das movimentações disponíveis no sistema e-SAJ de um certo processo, sendo $n$ o seu número de movimentações. Considere também uma variável $D_i, \ i = 1,\dots,n$ que assume valor $1$ se a $i$-ésima movimentação é uma decisão, um despacho ou uma sentença e $0$ em caso contrário. Definimos a viscosidade como
+
+$$ 
+V = \sum\limits_{i=2}^n D_i \times (T_i - T_{i-1}), 
+$$
+
+que pode ser simplificada quando consideramos apenas os termos em que $D_i > 0$
+
+$$ 
+V = \sum\limits_{\text{decisões}} (T_{\text{decisão}} - T_{\text{última movimentação}})
+$$
+
+Um obstáculo para a aplicação da metodologia reside na dificuldade de decidir se, num determinado processo, o magistrado gastará mais tempo decidindo ou se todas as suas intervenções já foram realizadas. Para resolver esse problema, os tempos foram estudados a partir de técnicas de Análise de Sobrevivência [@miller2011survival], uma área da estatística que estuda dados com informações incompletas. 
+
+Um exemplo comum desse tipo de análise é o estudo de tempos de falha de equipamentos (por exemplo, lâmpadas domésticas). Como por vezes é inviável aguardar a quebra de todos equipamentos de uma amostra, no momento da análise temos equipamentos que falharam (denominados falhas) e equipamentos que falharão no futuro (denominados dados censurados à direita). Essa análise é importante, pois ignorar os equipamentos que ainda não falharm pode levar à subestimação dos tempos de falha. As censuras fornecem informação parcial sobre os maiores tempos que poderiam ocorrer se o tempo de observação fosse maior.
+
+Nesta aplicação, estamos estudando o tempo total associado às decisões, despachos ou sentenças até que o último evento desse tipo ocorra. Consideramos que o tempo de um processo é censurado se ainda não apresentou movimentações que estão associadas a finalização dos processos, como baixa, arquivamento ou sentença. 
+
+# Resultados
+
+Esta seção é dedicada ao cálculo do *número efetivo de processos* relativos à matéria empresarial nas varas cíveis da Comarca de São Paulo. Define-se essa quantidade como o volume processual corrigido por um fator de conversão que associe a carga de trabalho específica de processos empresariais e a carga de trabalho associada a processos comuns. Essa correção visa calcular quantos processos cíveis comuns proporcionam a mesma quantidade de trabalho de um processo empresarial, considerando como referência o magistrado médio.
+
+O cálculo dessa quantidade possui três componentes. Primeiro, obtemos uma estimativa para o *número absoluto de processos* empresariais distribuídos por ano no Foro Central Cível, denotado por $N$, seguindo a metodologia de quantificação da cifra oculta que foi descrita na seção anterior. Depois, calculamos uma taxa de conversão de processos cíveis comuns em empresariais, denotada $T_{E,C}$, que deve ser interpretada como a quantidade média de processos cíveis comuns que proporcionam a um magistrado a mesma quantidade de trabalho que um processo empresarial médio. Por fim, estimamos a proporção de processos empresariais da comarca de São Paulo que tramitam no Foro Central Cível (denotado pela letra $p$), possibilitando o cálculo do número total de processos empresariais da comarca de São Paulo.
+
+Assim, pelo descrito acima, o número efetivo de processos, denotado $N_e$, é dado por
+
+$$ 
+N_e = \frac{N \times T_{E,C}}{p} .
+$$
+
+# Volume processual
+
+O número total $N$ de processos empresariais distribuídos em cada ano pode ser representado por uma soma de duas quantidades: o número $N_0$ de processos classificados corretamente e $C$, a cifra oculta de processos empresariais com classificações genéricas. A expressão é dada por
+
+$$ 
+N = N_0 + C.
+$$
+
+Filtrando apenas os processos classificados corretamente, obtivemos $N_0 = 675$ processos empresariais por ano. Para estimar $C$, o primeiro passo adotado foi estabelecer um intervalo de variação para essa quantidade. 
+
+Supondo que todos os processos com assuntos genéricos são empresariais, teríamos uma média de 26.801 por ano. Essa quantidade é considerada muito alta, já que sozinha justificaria a criação de pelo menos 14 novas varas, considerando o critério numérico do Provimento n. 82/2011. O valor real de processos empresariais distribuídos por ano é um número situado entre 675 e 26.801, de tal forma que o problema de estimação de $N$ equivale à escolha de um valor dentro desse intervalo.
+
+A metodologia escolhida para o cálculo de $C$ consiste em obter, para cada classificação genérica, o número de esperado de processos empresariais classificados incorretamente. A título de exemplo, a Figura \@ref(fig:esperados) contém as 10 classificações genéricas que podem resultar em processos empresariais e os respectivos números esperados de processos. Construímos a mesma tabela para todas as classificações genéricas e $C$ foi calculado somando os valores da segunda coluna, resultando em 287 processos por ano.
+
+```{r esperados, fig.cap='. **Proporção de casos empresariais em cada classificação genérica.', fig.width=5, fig.height=2, fig.align='center'}
+readRDS("p_assuntos.rds") +
+  theme_minimal(11) +
+  ggtitle(NULL)
+```
+
+<br/>
+
+Pelo exposto, concluímos que o volume total de processos empresariais distribuídos por ano é dado por $N = N_0 + C = 961$.
+
+# Complexidade processual
+
+Conforme descrito anteriormente, a razão entre a quantidade de trabalho proporcionada por processos empresariais e comuns foi obtida comparando os tempos gastos pelos magistrados em cada situação. A Figura \@ref(fig:sobrev) ilustra o resultado da análise desse tempo com as curvas de sobrevivência para cada tipo de processo. Analisando as curvas, nota-se que, para toda quantidade de dias corridos $d$, a proporção de processos empresariais que consomem mais do que $d$ dias dos magistrados é estritamente maior do que a proporção de processos cíveis comuns consumindo essa mesma quantidade.
+
+```{r sobrev, fig.cap='. **Curva de sobrevivência dos tempos acumulados gastos em decisões e despachos (dias).', fig.width=4, fig.height=2, fig.align='center'}
+readRDS("p_sobrev.rds") +
+  theme_minimal(10) +
+  labs(colour = "Tipo de vara", y = "Proporção de\nprocessos") +
+  theme(legend.position = c(.8, .6))
+```
+
+<br/>
+
+<!--Paragrafo para o outro grafico mais legal-->
+
+```{r visc1, fig.cap='. **Razão de viscosidades (tempo total) versus dificuldade do caso', fig.width=4, fig.height=1.7, fig.align='center'}
+readRDS("p_viscosidade1.rds") +
+  scale_x_continuous(breaks = 1:10) +
+  theme_minimal(11) +
+  ggtitle(NULL) +
+  labs(y = "Razão entre as\nviscosidades")
+```
+
+<br/>
+
+```{r visc2, fig.cap='. **Razão de viscosidades (tempo da decisão) versus dificuldade do caso.', fig.width=4, fig.height=1.7, fig.align='center'}
+readRDS("p_viscosidade2.rds") +
+  scale_x_continuous(breaks = 1:10) +
+  theme_minimal(11) +
+  ggtitle(NULL) +
+  labs(y = "Razão entre as\nviscosidades")
+```
+
+<br/>
+
+Essa observação mostra que a carga de trabalho associada a processos empresariais é maior do que a carga associada a processos comuns. Entretanto, a fim de calcular a taxa $T_{E,C}$, precisamos de uma medida-resumo da diferença entre as duas curvas. Um resumo natural para curvas de sobrevivência é a quantidade de dias superada por exatamente metade dos processos observados, denominada mediana do tempo total gasto em decisões e despachos. Adotando esse critério, a comparação das duas curvas sugere que o valor de $T_{E,C}$ deve ser igual a 2,09.
+
+# Foros regionais
+
+A Secretaria de Planejamento do TJSP (SEPLAN), a pedido da Corregedoria Geral, produziu um relatório analítico contendo levantamentos de dados sobre processos empresariais nas varas da Comarca de São Paulo. Ao contrário do presente estudo, que limita-se ao Foro Central Cível, esse relatório estende suas considerações para os processos distribuídos no Foros Regionais, e propõe uma metodologia de contagem de processos similar a apresentada pela ABJ.
+
+A partir de uma lista de assuntos elaborada junto à Corregedoria, a SEPLAN apurou que aproximadamente 60% dos processos empresariais tramitam no Foro Central Cível. Assim consideramos, para os fins desta análise, que o valor de $p$ é 0,6, mesmo que os dois relatórios divirjam com relação a escolha de assuntos associados à processos de matéria empresarial.
+
+# Considerações Finais
+
+A partir dos valores estimados, concluímos que o número efetivo de processos distribuídos por ano é 
+
+$$
+N_e = \frac{N \times T_{E,C}}{p} = \frac{961 \times 2,09}{0,6} = 3.349.
+$$
+
+Considerando apenas o critério de 1.800 feitos por ano, o volume efetivo anual de processos observado justifica a criação de pelo menos uma vara empresarial. No entanto, considerando a sobra de mais de 1.500 processos, concluímos que a instalação de uma única vara pode sobrecarregar o trabalho dos novos magistrados. Por isso, sugerimos, num cenário ideal, a instalação de duas varas especializadas. Fora do cenário ideal a instalação de uma única vara com dois juízes já seria satisfatória, considerando o potencial ganho de produtividade.
+
+Por fim, ressaltamos que a instalação da(s) vara(s) precisa ser acompanhada com métricas de produtividade adequadas. Será necessário registrar o volume mensal de processos distribuído na(a) vara(s), avaliando se a especialização reduz o tempo mediano dos processos, a taxa de reforma de decisões e se o volume processual aqui calculado corresponde à realidade.
+
+# Apêndice
+
+```{r cnj}
+readRDS("tab_cnj.rds") %>% 
+  head(2) %>% 
+  knitr::kable(longtable = TRUE, 
+               booktabs = TRUE,
+               caption = 'Tabela de assuntos empresariais, baseada na tabela de assuntos do CNJ e na resolução 623/2013 do TJSP.')
+```
+
+# Referências

@@ -1,0 +1,5 @@
+book_filename: "enajus-submit"
+date: "`r as.Date('2016-11-28')`"
+language:
+    label:
+        fig: "**Figura "
