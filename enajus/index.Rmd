@@ -155,7 +155,7 @@ readRDS("p_viscosidade1.rds") +
 
 <br/>
 
-A Figura \@ref(Quando realizamos a mesma comparação considerando o tempo do juiz (soma dos tempos entre conclusos e decisões), a razão muda consideravelmentre.
+A Figura \@ref(fig:visc2) Quando realizamos a mesma comparação considerando o tempo do juiz (soma dos tempos entre conclusos e decisões), a razão muda consideravelmente. Nos casos mais simples, o tempo médio passa a ser maior que o dobro, permanecendo significativamente maior até o antepenúltimo decil. 
 
 ```{r visc2, fig.cap='. **Razão de tempos (tempo da decisão) versus dificuldade do caso.', fig.width=4, fig.height=1.7, fig.align='center'}
 readRDS("p_viscosidade2.rds") +
@@ -187,11 +187,15 @@ Considerando apenas o critério de 1.800 feitos por ano, o volume efetivo anual 
 
 Por fim, ressaltamos que a instalação da(s) vara(s) precisa ser acompanhada com métricas de produtividade adequadas. Será necessário registrar o volume mensal de processos distribuído na(a) vara(s), avaliando se a especialização reduz o tempo mediano dos processos, a taxa de reforma de decisões e se o volume processual aqui calculado corresponde à realidade.
 
+# Resultados práticos
+
+
+
 # Apêndice
 
 ```{r cnj}
 readRDS("tab_cnj.rds") %>% 
-  head(2) %>% 
+  # head(2) %>% 
   knitr::kable(longtable = TRUE, 
                booktabs = TRUE,
                caption = 'Tabela de assuntos empresariais, baseada na tabela de assuntos do CNJ e na resolução 623/2013 do TJSP.')
