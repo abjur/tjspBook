@@ -141,24 +141,28 @@ readRDS("p_sobrev.rds") +
 
 <br/>
 
+Uma forma mais intuitiva de verificar essa diferença é através da razão entre os tempos dos processos. A Figura \@ref(fig:visc1) mostra as razões entre os tempos médios dos processos, considerando os *decis* dos tempos totais em cada barra. Um decil dos tempos dos processos pode ser interpretado como uma métrica dificuldade de casos. Note que, quanto mais complexos os casos, mais próximos ficam os tempos de processos empresariais e comuns, tornando a razão igual a um. Nos casos mais curtos, os processos empresariais demoram aproximadamente 22% mais.
+
 <!--Paragrafo para o outro grafico mais legal-->
 
-```{r visc1, fig.cap='. **Razão de viscosidades (tempo total) versus dificuldade do caso', fig.width=4, fig.height=1.7, fig.align='center'}
+```{r visc1, fig.cap='. **Razão de tempos (tempo total) versus dificuldade do caso', fig.width=4, fig.height=1.7, fig.align='center'}
 readRDS("p_viscosidade1.rds") +
   scale_x_continuous(breaks = 1:10) +
   theme_minimal(11) +
   ggtitle(NULL) +
-  labs(y = "Razão entre as\nviscosidades")
+  labs(y = "Razão entre os\tempos")
 ```
 
 <br/>
 
-```{r visc2, fig.cap='. **Razão de viscosidades (tempo da decisão) versus dificuldade do caso.', fig.width=4, fig.height=1.7, fig.align='center'}
+A Figura \@ref(Quando realizamos a mesma comparação considerando o tempo do juiz (soma dos tempos entre conclusos e decisões), a razão muda consideravelmentre.
+
+```{r visc2, fig.cap='. **Razão de tempos (tempo da decisão) versus dificuldade do caso.', fig.width=4, fig.height=1.7, fig.align='center'}
 readRDS("p_viscosidade2.rds") +
   scale_x_continuous(breaks = 1:10) +
   theme_minimal(11) +
   ggtitle(NULL) +
-  labs(y = "Razão entre as\nviscosidades")
+  labs(y = "Razão entre os\ntempos")
 ```
 
 <br/>
