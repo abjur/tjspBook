@@ -50,6 +50,8 @@ A população em estudo é o conjunto de processos distribuídos entre 01/01/201
 
 As seguintes informações foram fornecidas pela Secretaria de Tecnologia de Informação (STI) do TJSP: Número do processo; Autor; Réu; Vara; Assunto, segundo as categorias descritas na tabela unificada de assuntos do Conselho Nacional de Justiça (CNJ); Classe, segundo as categorias descritas na tabela unificada de assuntos do CNJ; Data de distribuição; Lista de movimentações contendo data da movimentação e título da movimentação, remotamente inspirado nas categorias descritas na tabela unificada de movimentações do CNJ.
 
+Para mensurar intervalos de tempo dos processos levantados, foi necessário adotar uma metodologia para classificação das movimentações dos processos. Isso foi feito a partir da reclassificação de todos os títulos das movimentações, separando-se os intervalos de tempo que gerariam demanda dos magistrados e s
+
 # Critérios de identificação de processos empresariais
 
 A construção de um critério claro e reprodutível de classificação de processos empresariais é importante tanto para fins de contagem quanto para fins de mensuração de esforços. Para executar essa tarefa, começaremos construindo uma lista de assuntos processuais que estejam relacionados à matéria empresarial, utilizando como ponto de partida a tabela unificada de assuntos do CNJ (Res. 46) e a competência das Câmaras Especializadas em Direito Comercial. 
@@ -189,7 +191,7 @@ Por fim, ressaltamos que a instalação da(s) vara(s) precisa ser acompanhada co
 
 # Resultados práticos
 
-
+No dia 06 de dezembro de 2017, o TJSP instalou a 1ª e 2ª Varas Empresariais e de Conflitos Relacionados à Arbitragem e a 3ª Vara de Falências e Recuperações Judiciais da capital. O presente estudo foi o principal insumo utilizado para aprovar a criação das varas, já que trabalhos anteriores não conseguiram criar uma métrica para a complexidade dos casos.
 
 # Apêndice
 
