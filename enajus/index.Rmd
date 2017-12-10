@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ## Estudo Jurimétrico Sobre Varas Empresariais na Comarca de São Paulo 
 
-### Tema de submissão: Desempenho em organizações da justiça / Relatório
+### Tema de submissão: Desempenho em organizações da Justiça / Relatório
 
 # RESUMO
 
@@ -36,7 +36,7 @@ Nas análises realizadas, encontramos evidências de que um processo empresarial
 
 # Objetivo do estudo
 
-O presente estudo tem como objetivo geral fornecer insumos quantitativos para analisar o tema da especialização de varas empresariais. Por conta da existência de critérios de criação de varas, que serão explicitados na sequência, duas atividades receberão maior atenção no decorrer do relatório, sendo elas i) estimar o volume de processos empresariais distribuídos por ano nas 45 varas cíveis do Foro Central e ii) propor uma métrica de esforço do juíz em um processo e comparar o esforço médio em processos empresariais contra o esforço médio em processos não empresariais.
+O presente estudo tem como objetivo geral fornecer insumos quantitativos para analisar o tema da especialização de varas empresariais. Por conta da existência de critérios de criação de varas, que serão explicitados na sequência, duas atividades receberão maior atenção no decorrer do relatório, sendo elas i) estimar o volume de processos empresariais distribuídos por ano nas 45 varas cíveis do Foro Central e ii) propor uma métrica de esforço do juiz em um processo e comparar o esforço médio em processos empresariais contra o esforço médio em processos não empresariais.
 
 # Critérios para criação de varas
 
@@ -48,9 +48,9 @@ Nesse estudo, focamos principalmente no terceiro item. Esta escolha se justifica
 
 A população em estudo é o conjunto de processos distribuídos entre 01/01/2013 e 31/12/2015 em 44 Varas Cíveis e nas 2 varas especializadas em falência e recuperação judicial do Foro Central Cível da Comarca de São Paulo.
 
-As seguintes informações foram fornecidas pela Secretaria de Tecnologia de Informação (STI) do TJSP: Número do processo; Autor; Réu; Vara; Assunto, segundo as categorias descritas na tabela unificada de assuntos do Conselho Nacional de Justiça (CNJ); Classe, segundo as categorias descritas na tabela unificada de assuntos do CNJ; Data de distribuição; Lista de movimentações contendo data da movimentação e título da movimentação, remotamente inspirado nas categorias descritas na tabela unificada de movimentações do CNJ.
+As seguintes informações foram fornecidas pela Secretaria de Tecnologia da Informação (STI) do TJSP: Número do processo; Autor; Réu; Vara; Assunto, segundo as categorias descritas na tabela unificada de assuntos do Conselho Nacional de Justiça (CNJ); Classe, segundo as categorias descritas na tabela unificada de classes do CNJ; Data de distribuição; Lista de movimentações contendo data da movimentação e título da movimentação, remotamente inspirado nas categorias descritas na tabela unificada de movimentações do CNJ.
 
-Para mensurar intervalos de tempo dos processos levantados, foi necessário adotar uma metodologia para classificação das movimentações dos processos. Isso foi feito a partir da reclassificação de todos os títulos das movimentações, separando-se os intervalos de tempo que gerariam demanda dos magistrados e s
+Para mensurar intervalos de tempo dos processos levantados, foi necessário adotar uma metodologia para tratar os dados de movimentações dos processos. Isso foi feito através da reclassificação de todos os títulos das movimentações, separando-se os intervalos de tempo que gerariam demanda dos magistrados do restante das movimentações. Para lidar com o alto volume de dados (mais de 11 milhões de linhas), utilizamos expressões regulares aos títulos das movimentações, que são formas de representar diversas combinações de texto (letras maiúsculas e minúsculas, acentos, sinônimos etc) a partir de padrões simplificados.
 
 # Critérios de identificação de processos empresariais
 
@@ -60,11 +60,11 @@ Segundo a Resolução 623/2013 do TJSP, as matérias sob jurisdição das Câmar
 
 Após filtrar os assuntos da tabela de assuntos do CNJ associados a esses dispositivos, obtivemos a lista de assuntos descrita na Tabela \@ref(tab:cnj).
 
-<!--tabela-->
-
 Se o procedimento adotado consistisse apenas na construção dessa lista, ele estaria vulnerável a erros de registro, pois alguns processos foram classificados com assuntos mais genéricos do que os especificados na Tabela \@ref(tab:cnj). Por isso, a quantidade de processos empresariais obtida dessa forma subestimaria a real quantidade de processos empresariais, se considerarmos que existe uma parcela destes que está registrada incorretamente. Denominamos por *cifra oculta* a quantidade não observada de processos empresariais. 
 
 Uma forma de contornar esse problema é decidir quais processos com assuntos genéricos são, na verdade, empresariais. Na nossa aplicação, isso foi feito estimando a probabilidade de um assunto genérico tratar da matéria empresarial. Para esse cálculo, utilizamos a parcela da base de dados que foi classificada corretamente e calculamos a proporção de processos empresariais para cada assunto. A cifra oculta é estimada somando-se as probabilidades obtidas.
+
+A cifra oculta também pode ser estimada por modelos mais sofisticados. Ao invés de considerar somente a quantidade de casos corretamente classificada, seria possível adicionar variáveis extraídas de petições iniciais, dados dos serventuários das varas e até mesmo informações das partes. Um modelo que considera todas essas variáveis pode ser utilizado não só para estimar o valor da cifra oculta, mas também para predizer a classificação dos casos individualizados. Estes modelos podem ser utilizados para classificação automática dos documentos, economizando tempo do judiciário e fornecendo resultados mais precisos.
 
 # Mensuração do esforço do juiz em cada processo
 
@@ -76,7 +76,7 @@ Nas análises que seguem, a viscosidade não será utilizada exatamente da forma
 
 Para refinar o conceito, separamos a viscosidade em dois componentes: i) o tempo associado às movimentações serventuárias e ii) o tempo associado às decisões judiciais e outras intervenções dos magistrados. Justificamos essa separação supondo que o tempo gasto pelos magistrados em uma determinada classe de processos é mais informativa com relação à sua dificuldade fática e de direito do que o tempo total de tramitação, sujeito a todo tipo de interferência externa.
 
-Seguindo essa linha de raciocínio e considerando a finalidade desse estudo, a criação de varas especializadas, vamos definir viscosidade processual como o tempo gasto para a tomada de decisão dos magistrados. Em termos mais precisos, considere $T_i, \ i = 1,\dots,n$ as datas das movimentações disponíveis no sistema e-SAJ de um certo processo, sendo $n$ o seu número de movimentações. Considere também uma variável $D_i, \ i = 1,\dots,n$ que assume valor $1$ se a $i$-ésima movimentação é uma decisão, um despacho ou uma sentença e $0$ em caso contrário. Definimos a viscosidade como
+Seguindo essa linha de raciocínio e considerando a finalidade do estudo, a criação de varas especializadas, vamos definir viscosidade processual como o tempo gasto para a tomada de decisão dos magistrados. Em termos mais precisos, considere $T_i, \ i = 1,\dots,n$ as datas das movimentações disponíveis no sistema e-SAJ de um certo processo, sendo $n$ o seu número de movimentações. Considere também uma variável $D_i, \ i = 1,\dots,n$ que assume valor $1$ se a $i$-ésima movimentação é uma decisão, um despacho ou uma sentença e $0$ em caso contrário. Definimos a viscosidade como
 
 $$ 
 V = \sum\limits_{i=2}^n D_i \times (T_i - T_{i-1}), 
@@ -90,7 +90,7 @@ $$
 
 Um obstáculo para a aplicação da metodologia reside na dificuldade de decidir se, num determinado processo, o magistrado gastará mais tempo decidindo ou se todas as suas intervenções já foram realizadas. Para resolver esse problema, os tempos foram estudados a partir de técnicas de Análise de Sobrevivência [@miller2011survival], uma área da estatística que estuda dados com informações incompletas. 
 
-Um exemplo comum desse tipo de análise é o estudo de tempos de falha de equipamentos (por exemplo, lâmpadas domésticas). Como por vezes é inviável aguardar a quebra de todos equipamentos de uma amostra, no momento da análise temos equipamentos que falharam (denominados falhas) e equipamentos que falharão no futuro (denominados dados censurados à direita). Essa análise é importante, pois ignorar os equipamentos que ainda não falharm pode levar à subestimação dos tempos de falha. As censuras fornecem informação parcial sobre os maiores tempos que poderiam ocorrer se o tempo de observação fosse maior.
+Um exemplo comum desse tipo de análise é o estudo de tempos de falha de equipamentos (por exemplo, lâmpadas domésticas). Como por vezes é inviável aguardar a quebra de todos equipamentos de uma amostra, no momento da análise temos equipamentos que falharam (denominados falhas) e equipamentos que falharão no futuro (denominados dados censurados à direita). Essa análise é importante, pois ignorar os equipamentos que ainda não falharam pode levar à subestimação dos tempos de falha. As censuras fornecem informação parcial sobre os maiores tempos que poderiam ocorrer se o tempo de observação fosse maior.
 
 Nesta aplicação, estamos estudando o tempo total associado às decisões, despachos ou sentenças até que o último evento desse tipo ocorra. Consideramos que o tempo de um processo é censurado se ainda não apresentou movimentações que estão associadas a finalização dos processos, como baixa, arquivamento ou sentença. 
 
@@ -197,6 +197,7 @@ No dia 06 de dezembro de 2017, o TJSP instalou a 1ª e 2ª Varas Empresariais e 
 
 ```{r cnj}
 readRDS("tab_cnj.rds") %>% 
+  mutate_all(abjutils::rm_accent) %>% 
   # head(2) %>% 
   knitr::kable(longtable = TRUE, 
                booktabs = TRUE,
