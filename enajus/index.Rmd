@@ -152,7 +152,7 @@ readRDS("p_viscosidade1.rds") +
   scale_x_continuous(breaks = 1:10) +
   theme_minimal(11) +
   ggtitle(NULL) +
-  labs(y = "Razão entre os\tempos")
+  labs(y = "Razão entre os\ntempos")
 ```
 
 <br/>
@@ -197,7 +197,7 @@ No dia 06 de dezembro de 2017, o TJSP instalou a 1ª e 2ª Varas Empresariais e 
 
 ```{r cnj}
 readRDS("tab_cnj.rds") %>% 
-  mutate_all(abjutils::rm_accent) %>% 
+  # mutate_all(iconv, from = "latin1", to = "UTF-8") %>% 
   # head(2) %>% 
   knitr::kable(longtable = TRUE, 
                booktabs = TRUE,
